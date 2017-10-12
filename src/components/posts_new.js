@@ -26,8 +26,8 @@ class PostsNew extends Component {
                     component={this.renderField}
                 />
                 <Field
-                    label="Tags"
-                    name="tags"
+                    label="Categories"
+                    name="categories"
                     component={this.renderField}
                 />
                 <Field 
@@ -40,6 +40,26 @@ class PostsNew extends Component {
     }
 }
 
+function validate(values) {
+    console.log(values); // { title: 'sdfsdf', categories: 'safsd', content: 'sdfsfd' }
+    const errors = {};
+
+    // Validate the inputs from 'values'
+    if (!values.title) {
+        errors.title = 'Enter a title!';
+    }
+    if (!values.categories) {
+        errors.categories = 'Enter a categories';
+    }
+    if (!values.content) {
+        errors.content = 'Enter some content please';
+    }
+    // If errors is empty, the form is fine to submit
+    // If errors has any properties, redux form assumes form is invalid
+    return errors;
+}
+
+
 // reduxForm is very similar to connect function from react-redux library
 // we use reduxForm helper to wrap the postsNew component, by doing so,
 // we gave reduxForm the ability to communicate directly from this component
@@ -51,5 +71,6 @@ class PostsNew extends Component {
 // needs to be unique if you want this form to essentially live in isolation and 
 // not share any of its state with any other forms
 export default reduxForm({
+    validate,
     form: 'PostsNewForm'
 })(PostsNew);
