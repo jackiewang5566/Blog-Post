@@ -11,15 +11,22 @@ class PostsNew extends Component {
                     type="text"
                     {...field.input}
                 />
+                {field.meta.error}
             </div>
         )
+    }
+
+    onSubmit(values) {
+        console.log(values);
     }
 
     // The Field component which we are using to specify an input inside of 
     // this component
     render() {
+        const { handleSubmit } = this.props;
+
         return (
-            <form>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field
                     label="Title"
                     name="title"
@@ -35,13 +42,14 @@ class PostsNew extends Component {
                     name="content"
                     component={this.renderField}
                 />
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         );
     }
 }
 
 function validate(values) {
-    console.log(values); // { title: 'sdfsdf', categories: 'safsd', content: 'sdfsfd' }
+    // console.log(values); // { title: 'sdfsdf', categories: 'safsd', content: 'sdfsfd' }
     const errors = {};
 
     // Validate the inputs from 'values'
