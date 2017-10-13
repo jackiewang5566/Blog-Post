@@ -5,11 +5,10 @@ import { fetchPost } from '../actions';
 
 class PostsShow extends Component {
     componentDidMount() {
-        console.log('PostsShow');
-        console.log(this.props.match);
-        const { id } = this.props.match.params;
-        console.log(id);
-        this.props.fetchPost(id);
+        if (!this.props.post) {
+            const { id } = this.props.match.params;
+            this.props.fetchPost(id);
+        }
     }
 
     helperFunction() {
