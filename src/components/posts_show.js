@@ -46,7 +46,7 @@ class PostsShow extends Component {
     }
 }
 
-// ownProps below is the props object that is headed or going to PostsShow component
+// ownProps below is the props object that is headed or going to the PostsShow component
 function mapStateToProps({ posts }, ownProps) {
     // return { posts };
     return { post: posts[ownProps.match.params.id] };
